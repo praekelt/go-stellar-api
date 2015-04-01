@@ -1,0 +1,25 @@
+{
+  "name": "go-stellar-api",
+  "version": "0.0.0",
+  "description": "HTTP API for how we use stellar with vumi-go",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "mocha tests/**/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/praekelt/go-stellar-api.git"
+  },
+  "keywords": [
+    "stellar",
+    "vumi"
+  ],
+  "author": "Praekelt Foundation",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/praekelt/go-stellar-api/issues"
+  },
+  "devDependencies": {
+    "mocha": "~2.2.1"
+  }
+}
