@@ -1,5 +1,4 @@
 var request = require('supertest'),
-    defaults = require('defaults'),
     app = require('../src/app'),
     routes = require('../src/routes');
 

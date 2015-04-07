@@ -1,6 +1,5 @@
 var express = require('express'),
-    wallets = require('../api').wallets,
-    app = require('../app');
+    wallets = require('../api').wallets;
 
 
 module.exports = express.Router()
