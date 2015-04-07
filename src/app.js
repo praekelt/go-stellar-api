@@ -1,4 +1,5 @@
 var express = require('express'),
+    logger = require('morgan'),
     bodyParser = require('body-parser'),
     routes = require('./routes'),
     errors = require('./errors'),
@@ -7,6 +8,7 @@ var express = require('express'),
 
 var app = express()
   .set('conf', defaults())
+  .use(logger('dev'))
   .use(bodyParser.json())
   .use(routes)
   .use(errors.internal);

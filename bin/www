@@ -2,7 +2,6 @@
 var fs = require('fs'),
     defaults = require('defaults'),
     yaml = require('js-yaml'),
-    logger = require('morgan'),
     debug = require('debug')('www'),
     app = require('../src/app');
 
@@ -12,7 +11,6 @@ if (args.length) defaults(app.get('conf'), readConf(args[0]));
 
 
 var server = app
-  .use(logger('dev'))
   .listen(process.env.PORT || 3000, function() {
     debug('Listening on port ' + server.address().port);
   });
