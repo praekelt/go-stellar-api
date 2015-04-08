@@ -3,15 +3,15 @@ var wallets = exports,
     walletSdk = require('stellar-wallet-js-sdk');
 
 
-wallets.create = function(conf, params) {
+wallets.create = function(params) {
   var keys = walletSdk.util.generateKeyPair();
 
   // TODO handle errors thrown by the sdk
   return walletSdk.createWallet({
-    server: urlJoin(conf.wallet_server, 'v2'),
+    server: urlJoin(params.wallet_server, 'v2'),
     username: params.username,
     password: params.password,
-    kdfParams: conf.kdf_params,
+    kdfParams: params.kdf_params,
     keychainData: JSON.stringify(keys),
     publicKey: keys.publicKey,
     mainData: ''
