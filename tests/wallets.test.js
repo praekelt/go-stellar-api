@@ -1,4 +1,5 @@
-var request = require('supertest'),
+var assert = require('assert'),
+    request = require('supertest'),
     defaults = require('defaults'),
     sinon = require('sinon'),
     walletSdk = require('stellar-wallet-js-sdk'),
@@ -31,15 +32,6 @@ describe("/wallets/", function() {
         .returns(wallet.keyPair);
 
       walletSdk.createWallet
-        .withArgs({
-          server: wallet.server,
-          username: wallet.username,
-          password: wallet.password,
-          kdfParams: wallet.kdfParams,
-          keychainData: JSON.stringify(wallet.keyPair),
-          publicKey: wallet.keyPair.publicKey,
-          mainData: wallet.mainData
-        })
         .returns(Promise.resolve());
 
       request(app)
@@ -49,6 +41,22 @@ describe("/wallets/", function() {
           password: wallet.password
         })
         .expect(200)
+        .expect({})
+        .expect(function() {
+          assert(walletSdk.util.generateKeyPair.called);
+
+          assert(walletSdk.createWallet.calledOnce);
+
+          assert(walletSdk.createWallet.calledWith({
+            server: wallet.server,
+            username: wallet.username,
+            password: wallet.password,
+            kdfParams: wallet.kdfParams,
+            keychainData: JSON.stringify(wallet.keyPair),
+            publicKey: wallet.keyPair.publicKey,
+            mainData: wallet.mainData
+          }));
+        })
         .end(done);
     });
   });
