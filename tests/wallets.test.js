@@ -32,7 +32,7 @@ describe("/wallets/", function() {
         .returns(wallet.keyPair);
 
       walletSdk.createWallet
-        .returns(Promise.resolve());
+        .returns(Promise.resolve(wallet.wallet));
 
       request(app)
         .post('/wallets/')
