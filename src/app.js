@@ -6,8 +6,8 @@ var express = require('express'),
     defaults = require('./defaults');
 
 
-var app = express().set('conf', defaults())
-if (app.get('env') != 'test') app.use(logger('dev'))
+var app = express().set('conf', defaults());
+if (app.get('env') != 'test') app.use(logger('dev'));
 
 app
   .use(bodyParser.json())
