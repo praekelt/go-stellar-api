@@ -20,7 +20,8 @@ describe("/wallets/", function() {
     });
 
     afterEach(function() {
-      sinon.restore();
+      walletSdk.createWallet.restore();
+      walletSdk.util.generateKeyPair.restore();
     });
 
     it("should create a wallet", function(done) {
