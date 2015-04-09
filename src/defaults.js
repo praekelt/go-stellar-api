@@ -16,6 +16,7 @@ module.exports = function() {
     // memory intensive. Simple tests don't show much of an impact on memory
     // with these current parameters, but we still need to test this more
     // thoroughly.
+    // http://en.wikipedia.org/wiki/Scrypt
     kdf_params: {
       algorithm: 'scrypt',
       bits: 256,
