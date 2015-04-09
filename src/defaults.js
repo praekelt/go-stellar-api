@@ -1,6 +1,6 @@
 module.exports = function() {
   return {
-    wallet_server: 'http://localhost:3000',
+    wallet_server: 'http://localhost:3000/v2',
 
     kdf_params: {
       algorithm: 'scrypt',

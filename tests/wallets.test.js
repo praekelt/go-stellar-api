@@ -3,49 +3,42 @@ var request = require('supertest'),
     sinon = require('sinon'),
     walletSdk = require('stellar-wallet-js-sdk'),
     app = require('../src/app'),
+    fixtures = require('./fixtures'),
     Promise = require('bluebird').Promise;
 
 
 describe("/wallets/", function() {
   describe("POST /wallets/", function() {
-    var keys;
     var conf;
 
     beforeEach(function() {
-      conf = {
-        wallet_server: 'http://fakewalletserver.org',
-        kdf_params: {
-          algorithm: 'scrypt',
-          bits: 256,
-          n: 2,
-          r: 2,
-          p: 1
-        }
-      };
-
-      defaults(conf, app.get('conf'));
+      conf = defaults({}, app.get('conf'));
       app.set('conf', conf);
-
-      keys = walletSdk.util.generateKeyPair();
       sinon.stub(walletSdk, 'createWallet');
-      sinon.stub(walletSdk.util, 'generateKeyPair').returns(keys);
+      sinon.stub(walletSdk.util, 'generateKeyPair');
     });
 
     afterEach(function() {
-      walletSdk.util.generateKeyPair.restore();
-      walletSdk.createWallet.restore();
+      sinon.restore();
     });
 
     it("should create a wallet", function(done) {
+      var wallet = fixtures.wallets('spam@ham.org');
+      conf.wallet_server = wallet.server;
+      conf.kdf_params = wallet.kdfParams;
+
+      walletSdk.util.generateKeyPair
+        .returns(wallet.keyPair);
+
       walletSdk.createWallet
         .withArgs({
-          server: 'http://fakewalletserver.org/v2',
-          username: 'spam@ham.org',
-          password: 'r00t',
-          kdfParams: conf.kdf_params,
-          keychainData: JSON.stringify(keys),
-          publicKey: keys.publicKey,
-          mainData: ''
+          server: wallet.server,
+          username: wallet.username,
+          password: wallet.password,
+          kdfParams: wallet.kdfParams,
+          keychainData: JSON.stringify(wallet.keyPair),
+          publicKey: wallet.keyPair.publicKey,
+          mainData: wallet.mainData
         })
         .returns(Promise.resolve());
 
@@ -53,7 +46,7 @@ describe("/wallets/", function() {
         .post('/wallets/')
         .send({
           username: 'spam@ham.org',
-          password: 'r00t'
+          password: 't00r'
         })
         .expect(200)
         .end(done);
