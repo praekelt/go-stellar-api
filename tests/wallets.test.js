@@ -45,8 +45,8 @@ describe("/wallets/", function() {
       request(app)
         .post('/wallets/')
         .send({
-          username: 'spam@ham.org',
-          password: 't00r'
+          username: wallet.username,
+          password: wallet.password
         })
         .expect(200)
         .end(done);
