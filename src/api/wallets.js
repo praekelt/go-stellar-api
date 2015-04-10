@@ -16,3 +16,15 @@ wallets.create = function(params) {
     mainData: ''
   });
 };
+
+
+wallets.getKeyPair = function(params) {
+  // TODO handle errors thrown by the sdk
+  return walletSdk.getWallet({
+      server: params.wallet_server,
+      username: params.username,
+      password: params.password,
+    })
+    .call('getKeychainData')
+    .then(JSON.parse);
+};
