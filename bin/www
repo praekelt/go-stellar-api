@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+var fs = require('fs'),
+    defaults = require('defaults'),
+    yaml = require('js-yaml'),
+    debug = require('debug')('www'),
+    app = require('../src/app');
+
+
+var args = process.argv.slice(2);
+if (args.length) defaults(app.get('conf'), readConf(args[0]));
+
+
+var server = app
+  .listen(process.env.PORT || 3000, function() {
+    debug('Listening on port ' + server.address().port);
+  });
+
+
+function readConf(filename) {
+  return yaml.safeLoad(fs.readFileSync(filename));
+}
