@@ -9,8 +9,7 @@ payments.create = function(params) {
   return Promise.resolve(params)
     .then(setSrcData)
     .then(setDestData)
-    .then(pay)
-    .catch(console.error);
+    .then(pay);
 };
 
 
