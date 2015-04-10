@@ -10,7 +10,7 @@ describe("fixtureSet", function() {
   });
 
   it("should support setting up", function() {
-    var fixtures = fixtureSet({setup: setup})
+    var fixtures = fixtureSet({setup: setup});
 
     assert(typeof fixtures('foo') == 'undefined');
     fixtures.setup();
@@ -23,7 +23,7 @@ describe("fixtureSet", function() {
 
   it("should support tearing down", function() {
     var givenFixtures;
-    var fixtures = fixtureSet({teardown: teardown})
+    var fixtures = fixtureSet({teardown: teardown});
 
     assert(typeof givenFixtures == 'undefined');
     fixtures.teardown();

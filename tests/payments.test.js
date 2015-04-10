@@ -27,7 +27,6 @@ describe("/payments/", function() {
     it("should create a payment for stellar amounts", function(done) {
       var src = fixtures.wallets('spam@ham.org');
       var dest = fixtures.wallets('eggs@ham.org');
-      var issuer = fixtures.requests('stellarApi:issuer');
       conf.wallet_server = src.server;
       conf.stellar_api = fixtures.requests('stellarApi:url');
 
