@@ -5,7 +5,7 @@ var assert = require('assert'),
     walletSdk = require('stellar-wallet-js-sdk'),
     app = require('../src/app'),
     fixtures = require('./fixtures'),
-    Promise = require('bluebird').Promise;
+    Promise = require('bluebird');
 
 
 describe("/wallets/", function() {
