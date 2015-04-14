@@ -2,6 +2,8 @@ module.exports = function() {
   return {
     wallet_server: 'http://localhost:3000/v2',
 
+    stellar_api: 'https://test.stellar.org:9002',
+
     // scrypt is designed to be computationally intensive, as this makes
     // brute-force attacks difficult. For clients that are capable of running
     // an implementation of scrypt and have the time and computational power
